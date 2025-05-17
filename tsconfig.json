@@ -6,12 +6,14 @@
     "esModuleInterop": true,
     "strict": true,
     "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
     "outDir": "dist",
+    "rootDir": ".",
     "declaration": true,
-    "sourceMap": true,
-    "rootDir": "src"
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["packages/*"]
+    }
   },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "dist"]
+  "include": ["packages/**/*.ts", "bin/**/*.ts"],
+  "exclude": ["node_modules", "dist"],
 } 

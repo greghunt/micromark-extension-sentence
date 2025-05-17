@@ -4,11 +4,14 @@
   "description": "",
   "main": "dist/index.js",
   "type": "module",
+  "bin": {
+    "unified-semantics": "./dist/bin/index.js"
+  },
   "scripts": {
     "build": "tsc",
-    "example": "pnpm build && node dist/example.js",
-    "ast": "pnpm build && node dist/ast.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "prepare": "pnpm run build && chmod +x dist/bin/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "cli": "tsx bin/index.ts"
   },
   "keywords": [],
   "author": "",
@@ -18,8 +21,11 @@
     "@types/hast": "^3.0.4",
     "@types/mdast": "^4.0.3",
     "@types/node": "^20.11.24",
+    "@types/yargs": "^17.0.32",
     "micromark": "^4.0.2",
     "micromark-util-types": "^1.0.0",
+    "tsconfig-paths": "^4.2.0",
+    "tsx": "^4.19.4",
     "typescript": "^5.3.3"
   },
   "dependencies": {
@@ -30,6 +36,7 @@
     "remark-stringify": "^11.0.0",
     "unified": "^11.0.5",
     "unist-builder": "^4.0.0",
-    "unist-util-visit": "^5.0.0"
+    "unist-util-visit": "^5.0.0",
+    "yargs": "^17.7.2"
   }
 }
