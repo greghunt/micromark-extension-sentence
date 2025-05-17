@@ -1,6 +1,0 @@
----
-description: 
-globs: 
-alwaysApply: true
----
-When modifying package.json, always use pnpm whenever possible. Avoid modifying the contents of package.json directly if it can be done through PNPM
