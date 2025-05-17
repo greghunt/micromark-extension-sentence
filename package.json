@@ -1,0 +1,35 @@
+{
+  "name": "micromark-extension-sentence",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index.js",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "example": "pnpm build && node dist/example.js",
+    "ast": "pnpm build && node dist/ast.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.10.0",
+  "devDependencies": {
+    "@types/hast": "^3.0.4",
+    "@types/mdast": "^4.0.3",
+    "@types/node": "^20.11.24",
+    "micromark": "^4.0.2",
+    "micromark-util-types": "^1.0.0",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "hastscript": "^9.0.1",
+    "rehype-stringify": "^10.0.1",
+    "remark-parse": "^11.0.0",
+    "remark-rehype": "^11.1.2",
+    "remark-stringify": "^11.0.0",
+    "unified": "^11.0.5",
+    "unist-builder": "^4.0.0",
+    "unist-util-visit": "^5.0.0"
+  }
+}
