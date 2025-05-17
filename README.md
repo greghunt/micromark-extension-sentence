@@ -9,5 +9,30 @@ A collection of packages that adds semantic layers to the [unified](https://gith
 
 ## CLI
 
-- `pnpm cli parse tests/fixtures/markdown/simple.md`
-- `pnpm cli ast tests/fixtures/markdown/simple.md`
+Process markdown files with various plugins and output options:
+
+```bash
+# Basic usage (outputs HTML with sentence plugin enabled by default)
+pnpm cli process tests/fixtures/markdown/simple.md
+
+# Output the AST instead of HTML
+pnpm cli process tests/fixtures/markdown/simple.md --output ast
+
+# Apply semantic tree transformation
+pnpm cli process tests/fixtures/markdown/simple.md --semtree
+
+# Disable sentence plugin
+pnpm cli process tests/fixtures/markdown/simple.md --no-sentence
+
+# Output AST with semtree transformation
+pnpm cli process tests/fixtures/markdown/simple.md --output ast --semtree
+
+# Full options example
+pnpm cli process tests/fixtures/markdown/simple.md --output ast --semtree --sentence
+```
+
+Options:
+- `--output`: Choose output format (`html` or `ast`), default is `html`
+- `--sentence`: Enable sentence plugin (enabled by default)
+- `--no-sentence`: Disable sentence plugin
+- `--semtree`: Apply semantic tree transformation (disabled by default)

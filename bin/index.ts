@@ -9,46 +9,61 @@ import yargs from 'yargs'
 import { hideBin } from 'yargs/helpers'
 import type { Argv } from 'yargs'
 import { remarkSentence, rehypeSentence } from '@/micromark-extension-sentence/index.js'
+import { semtree } from '@/mdast-util-semtree/index.js'
+import type { Root } from 'mdast'
 
-async function parseCommand(argv: { file: string }) {
-    try {
-        const buf = await fs.readFile(argv.file)
-        const input = buf.toString()
+type OutputFormat = 'html' | 'ast'
 
-        const processor = unified()
-            .use(remarkParse)
-            .use(remarkSentence)
-            .use(remarkRehype)
-            .use(rehypeSentence)
-            .use(rehypeStringify)
-
-        const result = processor.processSync(input).toString()
-        console.log(result)
-    } catch (error) {
-        console.error('Error processing file:', error instanceof Error ? error.message : error)
-        process.exit(1)
-    }
+interface ProcessOptions {
+    file: string
+    useSentence?: boolean
+    useSemtree?: boolean
+    output: OutputFormat
 }
 
-async function astCommand(argv: { file: string; html?: boolean }) {
+async function processMarkdown(options: ProcessOptions) {
     try {
-        const buf = await fs.readFile(argv.file)
+        const buf = await fs.readFile(options.file)
         const input = buf.toString()
 
-        const processor = unified()
-            .use(remarkParse)
-            .use(remarkSentence)
+        // Initialize the processor with remark-parse
+        const processor = unified().use(remarkParse)
 
-        if (argv.html) {
-            processor.use(remarkRehype)
-            processor.use(rehypeSentence)
+        // Apply sentence plugin if requested
+        if (options.useSentence) {
+            processor.use(remarkSentence)
         }
 
-        const finalAST = processor.runSync(
-            processor.parse(input)
-        )
+        // Parse the input
+        let tree = processor.parse(input)
+        
+        // Run transforms up to this point
+        let result = processor.runSync(tree) as Root
 
-        console.log(inspect(finalAST, { depth: null, colors: true }))
+        // Apply semtree transformation if requested
+        if (options.useSemtree) {
+            result = semtree()(result)
+        }
+
+        // If the output should be HTML, continue the pipeline
+        if (options.output === 'html') {
+            processor.use(remarkRehype)
+            
+            // Apply rehype-sentence if the sentence option is enabled
+            if (options.useSentence) {
+                processor.use(rehypeSentence)
+            }
+            
+            processor.use(rehypeStringify)
+            
+            // Continue processing to generate HTML
+            const html = processor.stringify(processor.runSync(result))
+            
+            console.log(String(html))
+        } else {
+            // Output the AST
+            console.log(inspect(result, { depth: null, colors: true }))
+        }
     } catch (error) {
         console.error('Error processing file:', error instanceof Error ? error.message : error)
         process.exit(1)
@@ -56,26 +71,37 @@ async function astCommand(argv: { file: string; html?: boolean }) {
 }
 
 yargs(hideBin(process.argv))
-    .command('parse <file>', 'Parse a markdown file and output HTML', (yargs: Argv) => {
-        return yargs.positional('file', {
-            describe: 'Path to the markdown file',
-            type: 'string',
-            demandOption: true
-        })
-    }, parseCommand)
-    .command('ast <file>', 'Show the AST of a markdown file', (yargs: Argv) => {
+    .command('process <file>', 'Process a markdown file with specified plugins and output format', (yargs: Argv) => {
         return yargs
             .positional('file', {
                 describe: 'Path to the markdown file',
                 type: 'string',
                 demandOption: true
             })
-            .option('html', {
-                describe: 'Include HTML transformation in AST',
+            .option('sentence', {
+                describe: 'Use the sentence plugin',
+                type: 'boolean',
+                default: true
+            })
+            .option('semtree', {
+                describe: 'Apply semantic tree transformation',
                 type: 'boolean',
                 default: false
             })
-    }, astCommand)
+            .option('output', {
+                describe: 'Output format (ast or html)',
+                type: 'string',
+                choices: ['ast', 'html'],
+                default: 'html'
+            })
+    }, (argv) => {
+        return processMarkdown({
+            file: argv.file,
+            useSentence: argv.sentence,
+            useSemtree: argv.semtree,
+            output: argv.output as OutputFormat
+        })
+    })
     .demandCommand(1, 'You need to specify a command')
     .help()
     .parse()
