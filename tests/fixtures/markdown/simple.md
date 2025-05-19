@@ -2,5 +2,5 @@
 
 Hello, world! This is another sentence. Any questions for me?
 
-No, then let's continue.
+No, then let's continue. [Link](https://google.com)
 
