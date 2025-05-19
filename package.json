@@ -1,7 +1,7 @@
 {
-  "name": "micromark-extension-sentence",
+  "name": "@unified-semantics/cli",
   "version": "1.0.0",
-  "description": "",
+  "description": "CLI tool for processing markdown with semantic enhancements including sentence-level parsing and semantic tree transformations",
   "main": "dist/index.js",
   "type": "module",
   "bin": {
@@ -15,8 +15,30 @@
     "test:coverage": "vitest run --coverage",
     "cli": "tsx bin/index.ts"
   },
-  "keywords": [],
-  "author": "",
+  "files": [
+    "dist",
+    "LICENSE",
+    "README.md"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/greghunt/unified-semantics.git"
+  },
+  "bugs": {
+    "url": "https://github.com/greghunt/unified-semantics/issues"
+  },
+  "homepage": "https://github.com/greghunt/unified-semantics#readme",
+  "keywords": [
+    "unified",
+    "markdown",
+    "semantic",
+    "sentence",
+    "cli",
+    "ast",
+    "mdast",
+    "micromark"
+  ],
+  "author": "Greg Hunt <npm@ghunt.io>",
   "license": "ISC",
   "packageManager": "pnpm@10.10.0",
   "devDependencies": {
