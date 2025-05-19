@@ -1,7 +1,7 @@
 {
-    "name": "@unified-semantics/mdast-util-semtree",
+    "name": "@unified-semantics/micromark-extension-sentence",
     "version": "1.0.0",
-    "description": "Transformer utility for semantically nesting mdast nodes to their proper hierarchy",
+    "description": "Micromark extension that adds sentence-level parsing to markdown",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
     "type": "module",
@@ -17,10 +17,10 @@
     },
     "keywords": [
         "unified",
-        "mdast",
+        "micromark",
         "markdown",
-        "semantics",
-        "hierarchy"
+        "sentence",
+        "extension"
     ],
     "author": "Greg Hunt <npm@ghunt.io>",
     "license": "ISC",
@@ -33,9 +33,7 @@
     },
     "homepage": "https://github.com/greghunt/unified-semantics#readme",
     "dependencies": {
-        "unist-util-visit": "^5.0.0"
-    },
-    "peerDependencies": {
-        "@types/mdast": "^4.0.3"
+        "micromark": "^4.0.2",
+        "micromark-util-types": "^1.0.0"
     }
 }
