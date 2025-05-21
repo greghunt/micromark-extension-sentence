@@ -1,6 +1,6 @@
 {
     "name": "@unified-semantics/micromark-extension-sentence",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "description": "Micromark extension that adds sentence-level parsing to markdown",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
@@ -34,8 +34,12 @@
     },
     "homepage": "https://github.com/greghunt/unified-semantics#readme",
     "dependencies": {
+        "hast": "^1.0.0",
+        "mdast": "^3.0.0",
         "micromark": "^4.0.2",
-        "micromark-util-types": "^1.0.0"
+        "micromark-util-types": "^1.1.0",
+        "unist-builder": "^4.0.0",
+        "unist-util-visit": "^5.0.0"
     },
     "devDependencies": {
         "typescript": "^5.8.3"

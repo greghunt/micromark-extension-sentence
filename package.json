@@ -1,6 +1,6 @@
 {
-  "name": "@unified-semantics/cli",
-  "version": "1.0.1",
+  "name": "unified-semantics",
+  "version": "1.0.3",
   "description": "CLI tool for processing markdown with semantic enhancements including sentence-level parsing and semantic tree transformations",
   "main": "dist/index.js",
   "type": "module",
