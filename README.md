@@ -6,13 +6,13 @@ A collection of packages that adds semantic layers to the [unified](https://gith
 
 ### [micromark-extension-sentence](packages/micromark-extension-sentence)
 
-[![npm version](https://img.shields.io/npm/v/micromark-extension-sentence.svg)](https://www.npmjs.com/package/micromark-extension-sentence)
+[![npm version](https://img.shields.io/npm/v/@unified-semantics/micromark-extension-sentence.svg)](https://www.npmjs.com/package/@unified-semantics/micromark-extension-sentence)
 
 An extension for markdown that adds a `sentence` construct. This is an important missing element in both markdown and HTML, since it's a semantic unit for an idea. Paragraphs are currently the atomic semantic unit in both languages, but in reality they are collections of sentences.
 
 ### [mdast-util-semtree](packages/mdast-util-semtree)
 
-[![npm version](https://img.shields.io/npm/v/mdast-util-semtree.svg)](https://www.npmjs.com/package/mdast-util-semtree)
+[![npm version](https://img.shields.io/npm/v/@unified-semantics/mdast-util-semtree.svg)](https://www.npmjs.com/package/@unified-semantics/mdast-util-semtree)
 
 A transformer utility for markdown AST that semantically nests nodes to their proper meaningful depth. It doesn't affect compiled output, but provides a more accurate representation of document structure:
 
