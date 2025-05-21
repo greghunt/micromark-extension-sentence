@@ -26,39 +26,38 @@ async function processMarkdown(options: ProcessOptions) {
         const buf = await fs.readFile(options.file)
         const input = buf.toString()
 
-        // Initialize the processor with remark-parse
-        const processor = unified().use(remarkParse)
+        // Create a processor for parsing and initial transformations
+        const parseProcessor = unified()
+            .use(remarkParse)
 
         // Apply sentence plugin if requested
         if (options.useSentence) {
-            processor.use(remarkSentence)
+            parseProcessor.use(remarkSentence)
         }
 
-        // Parse the input
-        let tree = processor.parse(input)
-        
-        // Run transforms up to this point
-        let result = processor.runSync(tree) as Root
+        // Parse the input and run initial transformations
+        let tree = parseProcessor.parse(input)
+        let result = parseProcessor.runSync(tree) as Root
 
         // Apply semtree transformation if requested
         if (options.useSemtree) {
             result = semtree()(result)
         }
 
-        // If the output should be HTML, continue the pipeline
+        // If the output should be HTML, create a new processor for HTML generation
         if (options.output === 'html') {
-            processor.use(remarkRehype)
+            const htmlProcessor = unified()
+                .use(remarkRehype)
             
             // Apply rehype-sentence if the sentence option is enabled
             if (options.useSentence) {
-                processor.use(rehypeSentence)
+                htmlProcessor.use(rehypeSentence)
             }
             
-            processor.use(rehypeStringify)
+            htmlProcessor.use(rehypeStringify)
             
-            // Continue processing to generate HTML
-            const html = processor.stringify(processor.runSync(result))
-            
+            // Generate HTML using the new processor
+            const html = htmlProcessor.stringify(htmlProcessor.runSync(result))
             console.log(String(html))
         } else {
             // Output the AST

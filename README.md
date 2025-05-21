@@ -32,14 +32,11 @@ The `unified-semantics` CLI tool processes markdown files with various plugins a
 # Basic usage (outputs HTML with sentence plugin enabled by default)
 pnpm cli process tests/fixtures/markdown/simple.md
 
-# Output the AST instead of HTML
-pnpm cli process tests/fixtures/markdown/simple.md --output ast
-
 # Apply semantic tree transformation
 pnpm cli process tests/fixtures/markdown/simple.md --semtree
 
-# Disable sentence plugin
-pnpm cli process tests/fixtures/markdown/simple.md --no-sentence
+# Output the AST instead of HTML
+pnpm cli process tests/fixtures/markdown/simple.md --output ast
 
 # Output AST with semtree transformation
 pnpm cli process tests/fixtures/markdown/simple.md --output ast --semtree
@@ -54,5 +51,4 @@ pnpm cli process tests/fixtures/markdown/simple.md --output ast --semtree --sent
 |--------|-------------|---------|
 | `--output` | Output format (`html` or `ast`) | `html` |
 | `--sentence` | Enable sentence plugin | `true` |
-| `--no-sentence` | Disable sentence plugin | - |
 | `--semtree` | Apply semantic tree transformation | `false` |
