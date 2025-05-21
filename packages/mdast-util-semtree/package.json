@@ -1,6 +1,6 @@
 {
     "name": "@unified-semantics/mdast-util-semtree",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "Transformer utility for semantically nesting mdast nodes to their proper hierarchy",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",

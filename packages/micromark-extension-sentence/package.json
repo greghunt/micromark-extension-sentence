@@ -1,6 +1,6 @@
 {
     "name": "@unified-semantics/micromark-extension-sentence",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "Micromark extension that adds sentence-level parsing to markdown",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
