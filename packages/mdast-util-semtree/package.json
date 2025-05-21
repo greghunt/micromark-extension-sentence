@@ -1,6 +1,6 @@
 {
     "name": "@unified-semantics/mdast-util-semtree",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Transformer utility for semantically nesting mdast nodes to their proper hierarchy",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
@@ -12,8 +12,9 @@
     ],
     "scripts": {
         "build": "tsc",
-        "prepare": "pnpm run build",
-        "test": "vitest run"
+        "prepare": "pnpm build",
+        "test": "vitest run",
+        "prepublishOnly": "pnpm prepare"
     },
     "keywords": [
         "unified",
@@ -37,5 +38,8 @@
     },
     "peerDependencies": {
         "@types/mdast": "^4.0.3"
+    },
+    "devDependencies": {
+        "typescript": "^5.8.3"
     }
 }

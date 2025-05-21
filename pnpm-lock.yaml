@@ -75,6 +75,10 @@ importers:
       unist-util-visit:
         specifier: ^5.0.0
         version: 5.0.0
+    devDependencies:
+      typescript:
+        specifier: ^5.8.3
+        version: 5.8.3
 
   packages/micromark-extension-sentence:
     dependencies:
@@ -84,6 +88,10 @@ importers:
       micromark-util-types:
         specifier: ^1.0.0
         version: 1.1.0
+    devDependencies:
+      typescript:
+        specifier: ^5.8.3
+        version: 5.8.3
 
 packages:
 
